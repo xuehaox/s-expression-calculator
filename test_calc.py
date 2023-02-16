@@ -6,7 +6,7 @@ from subprocess import check_output
 
 
 def run_calc(expr: str) -> str:
-    return check_output('python ./calc.py {}'.format(expr)).decode(sys.stdout.encoding).strip()
+    return check_output('python3 ./calc.py {}'.format(expr), shell=True).decode(sys.stdout.encoding).strip()
 
 class TestLexer(unittest.TestCase):
     
