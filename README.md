@@ -1,7 +1,12 @@
 # S-expression Calculator
 S-expression Calculator implemented in Python.
 
-> Tested in Python 3.11.1 Windows
+## Entry Script
+
+`calc.py` is the entry script.
+
+> `$ ./calc.py "(add 12 12)"`  
+> `24`
 
 ## Implementation
 
