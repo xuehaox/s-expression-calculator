@@ -1,15 +1,15 @@
 # S-expression Calculator
 S-expression Calculator implemented in Python.
 
-> Tested in Python 3.11.1, Windows
+> Tested in Python 3.11.1 Windows
 
 ## Implementation
 
-expression --`lexer`--> tokens --`parser`--> ast --`eval`--> result
+`expression` --lexer--> `tokens` --parser--> `ast` --eval--> `result`
 
 ## Extensibility
 
-Define new functions with arbitrary number of arguments is implemented. You can define new functions in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments. 
+Defining new functions with arbitrary number of arguments is implemented. You can define new functions in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments. 
 
 ## Error Handling 
 
@@ -28,5 +28,5 @@ At the end, if there are `'('` left in the stack, the syntax of the expression i
 ### Check semantic error
 
 Semantic error can be checked after the `ast` is built.  
-A function can be implement that **trys** to execute the `ast` recursively but not actually execute it. It can check if the numbers of arguments of functions are correct and check all leaf nodes on the `ast` are `Integers`.
+A function can be implement that **trys** to execute the `ast` recursively but not actually execute it. It can check if the numbers of arguments of functions are correct and check if all leaf nodes on the `ast` are `Integers`.
 
