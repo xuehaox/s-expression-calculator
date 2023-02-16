@@ -1,4 +1,7 @@
 # S-expression Calculator
+
+> Author: Xuehao Xiang
+
 S-expression Calculator implemented in Python.
 
 ## Entry Script
