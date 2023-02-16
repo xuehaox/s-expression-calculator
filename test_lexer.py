@@ -1,4 +1,4 @@
-#!python3
+#!/usr/bin/env python3
 
 import unittest
 from my_lexer import TokenType, Token, lexer
