@@ -1,6 +1,6 @@
 # S-expression Calculator
 
-> Author: Xuehao Xiang
+## Author: Xuehao Xiang
 
 S-expression Calculator implemented in Python.
 
@@ -8,8 +8,10 @@ S-expression Calculator implemented in Python.
 
 `calc.py` is the entry script.
 
-> `$ ./calc.py "(add 12 12)"`  
-> `24`
+```bash
+$ ./calc.py "(add 12 12)"  
+24
+```
 
 ## Implementation
 
