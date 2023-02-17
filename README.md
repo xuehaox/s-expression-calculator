@@ -15,11 +15,11 @@ $ ./calc.py "(add 12 12)"
 
 ## Implementation
 
-`expression` --lexer--> `tokens` --parser--> `ast` --eval--> `result`
+expression *--`lexer`-->* tokens *--`parser`-->* ast *--`eval`-->* result
 
-The lexer will take expression string as input, and output a list of tokens (Left Parenthesis, Right Parenthesis, Integer, Identifier, etc.).  
-The parser will take tokens as input, and output the abstract syntax tree of the expression.  
-The evaluator execute the AST recursively.
+The `lexer` will take expression string as input, and output a list of tokens (Left Parenthesis, Right Parenthesis, Integer, Identifier, etc.).  
+The `parser` will take tokens as input, and output the abstract syntax tree of the expression.  
+The `evaluator` execute the AST recursively.
 
 ## Extensibility
 
@@ -29,11 +29,11 @@ For example, operators can be allowed by adding `TokenType.OPERATOR: set("+-*/^"
 
 ### New functions
 New functions with arbitrary number of arguments can be easily defined in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments.  
-For example, to pre-define a `square` function, add `"square": Function(lambda x: x**2, 1),`, then expression like `(square 3)` can be evaluated.
+For example, to pre-define a `square` function, add `"square": Function(lambda x: x**2, 1)`, then expressions like `(square 3)` can be evaluated.
 
 ## Error Handling 
 
- Error handling functions can be implemented separately (without handling errors inside of lexer, parser, and evaluator). 
+ Error handling functions can be implemented separately (instead of handling errors inside of lexer, parser, and evaluator). 
 
 ### Check invalid characters and unknown tokens
 A `checkInvalidTokens(tokens: list[Token])` function can be implemented. 
@@ -41,7 +41,7 @@ It takes `tokens` as input, and check if `tokens` has `UNKNOWN` type (invalid ch
 
 ### Check syntax error
 
-A `checkSyntaxErrors(tokens: list[Token]):` function can be implemented.
+A `checkSyntaxErrors(tokens: list[Token])` function can be implemented.
 It takes `tokens` as input, but only check if parentheses are matched. It can read parentheses and put them into a `stack`. If a `')'` matches with a `'('` in the stack, pop that `'('`, otherwise the syntax of the expression is not correct.
 At the end, if there are `'('` left in the stack, the syntax of the expression is not correct.
 
