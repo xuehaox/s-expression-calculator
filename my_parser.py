@@ -17,29 +17,20 @@ def _parseExpr(tokenIter: Iterator[Token | None]) -> Expr:
     # an expr consists of terms, terms can be expr or token
     terms = []
 
-
     while token != None:
-        
-        # put an interger into terms 
-        if token.type == TokenType.INTEGER:
-            terms.append(token)
-            token = next(tokenIter)
 
-        # put an identifier into terms
-        elif token.type == TokenType.ID:
-            terms.append(token)
-            token = next(tokenIter)
+        if token.type == TokenType.RPAREN:
+            break 
 
         # parse an embeded expr, then put this expr to terms 
         elif token.type == TokenType.LPAREN:
             terms.append(_parseExpr(tokenIter))
             token = next(tokenIter)
         
-        elif token.type == TokenType.RPAREN:
-            break 
-
+        # put a token into terms
         else:
-            assert(False)
+            terms.append(token)
+            token = next(tokenIter)
         
     return Expr(tuple(terms))
 
@@ -47,7 +38,7 @@ def _parseExpr(tokenIter: Iterator[Token | None]) -> Expr:
 # parse tokens to AST tree
 def parser(tokens: list[Token]) -> Expr | Token:
     # filter whitespace tokens
-    tokens = [token for token in tokens if token.type != TokenType.WHITESPACE]
+    tokens = [token for token in tokens if token.type not in [TokenType.WHITESPACE, TokenType.UNKNOWN]]
 
     assert(len(tokens) != 0)
     
