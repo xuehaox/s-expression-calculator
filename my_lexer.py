@@ -1,7 +1,6 @@
-from ast import Tuple
+import string
 from enum import Enum
 from dataclasses import dataclass
-import string
 from typing import Dict, Iterator, Tuple 
 
 
@@ -45,12 +44,11 @@ def _scanToken(currentChar: str, charsIter: Iterator[str]) -> Tuple[Token, str]:
         currentChar = next(charsIter)
         return token, currentChar
     
-    # scan paran
+    # scan parenthesis
     if tokenType == TokenType.LPAREN or tokenType == TokenType.RPAREN:
         token = Token(tokenType, currentChar)
         currentChar = next(charsIter)
         return token, currentChar
-    
     
     # scan token
     tokenStr = currentChar
@@ -67,7 +65,6 @@ def _scanToken(currentChar: str, charsIter: Iterator[str]) -> Tuple[Token, str]:
     token = Token(tokenType, tokenStr)
 
     return (token, currentChar)
-
 
 
 # read expression characters and produce tokens

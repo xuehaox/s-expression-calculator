@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Iterator, Tuple, Union
-from my_lexer import TokenType, Token, lexer
+from my_lexer import TokenType, Token
 
 
 
