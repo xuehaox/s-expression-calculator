@@ -45,6 +45,13 @@ def _scanToken(currentChar: str, charsIter: Iterator[str]) -> Tuple[Token, str]:
         currentChar = next(charsIter)
         return token, currentChar
     
+    # scan paran
+    if tokenType == TokenType.LPAREN or tokenType == TokenType.RPAREN:
+        token = Token(tokenType, currentChar)
+        currentChar = next(charsIter)
+        return token, currentChar
+    
+    
     # scan token
     tokenStr = currentChar
     charSet = TOKEN_CHARSET[tokenType]

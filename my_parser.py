@@ -10,12 +10,13 @@ class Expr:
 
 
 # parse tokens recursively
-def __parseExpr(tokenIter: Iterator[Token | None]) -> Expr:
+def _parseExpr(tokenIter: Iterator[Token | None]) -> Expr:
     token = next(tokenIter)
     assert(token.type != TokenType.UNKNOWN)
     
     # an expr consists of terms, terms can be expr or token
     terms = []
+
 
     while token != None:
         
@@ -31,7 +32,7 @@ def __parseExpr(tokenIter: Iterator[Token | None]) -> Expr:
 
         # parse an embeded expr, then put this expr to terms 
         elif token.type == TokenType.LPAREN:
-            terms.append(__parseExpr(tokenIter))
+            terms.append(_parseExpr(tokenIter))
             token = next(tokenIter)
         
         elif token.type == TokenType.RPAREN:
@@ -45,8 +46,8 @@ def __parseExpr(tokenIter: Iterator[Token | None]) -> Expr:
 
 # parse tokens to AST tree
 def parser(tokens: list[Token]) -> Expr | Token:
-    # filter whitespace and unknown tokens
-    tokens = [token for token in tokens if token.type not in [TokenType.UNKNOWN, TokenType.WHITESPACE]]
+    # filter whitespace tokens
+    tokens = [token for token in tokens if token.type != TokenType.WHITESPACE]
 
     assert(len(tokens) != 0)
     
@@ -58,7 +59,7 @@ def parser(tokens: list[Token]) -> Expr | Token:
         
         token = next(tokenIter)
         assert(token.type == TokenType.LPAREN)
-        expr = __parseExpr(tokenIter)
+        expr = _parseExpr(tokenIter)
 
         return expr
 
