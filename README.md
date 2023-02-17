@@ -18,8 +18,8 @@ $ ./calc.py "(add 12 12)"
 `expression` --lexer--> `tokens` --parser--> `ast` --eval--> `result`
 
 The lexer will take expression string as input, and output a list of tokens (Left Parenthesis, Right Parenthesis, Integer, Identifier, etc.).  
-The parser will take tokens as input, and output the abstract syntax tree for the expression.  
-the evaluator execute the AST recursively.
+The parser will take tokens as input, and output the abstract syntax tree of the expression.  
+The evaluator execute the AST recursively.
 
 ## Extensibility
 
