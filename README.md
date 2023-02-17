@@ -17,13 +17,23 @@ $ ./calc.py "(add 12 12)"
 
 `expression` --lexer--> `tokens` --parser--> `ast` --eval--> `result`
 
+The lexer will take expression string as input, and output a list of tokens (Left Parenthesis, Right Parenthesis, Integer, Identifier, etc.).  
+The parser will take tokens as input, and output the abstract syntax tree for the expression.  
+the evaluator execute the AST recursively.
+
 ## Extensibility
 
-Defining new functions with arbitrary number of arguments is implemented. You can define new functions in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments. 
+### New type of tokens
+New types of tokens can be easily added in `TOKEN_CHARSET` in `my_lexer.py`.  
+For example, operators can be allowed by adding `TokenType.OPERATOR: set("+-*/^")`
+
+### New functions
+New functions with arbitrary number of arguments can be easily defined in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments.  
+For example, to pre-define a `square` function, add `"square": Function(lambda x: x**2, 1),`, then expression like `(square 3)` can be evaluated.
 
 ## Error Handling 
 
-Error handling can be implemented separatly.   
+ Error handling functions can be implemented separately (without handling errors inside of lexer, parser, and evaluator). 
 
 ### Check invalid characters and unknown tokens
 A `checkInvalidTokens(tokens: list[Token])` function can be implemented. 
