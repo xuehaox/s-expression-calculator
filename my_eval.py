@@ -1,4 +1,3 @@
-import sys 
 import operator
 from dataclasses import dataclass
 from typing import Callable, Dict
@@ -20,7 +19,7 @@ ID_TABLE: Dict[str, Function] = {
 }
 
 
-# evaluate the expr recursively
+# evaluate an expr recursively
 def eval(expr: Expr | Token) -> int:
     
     # evaluate an integer
@@ -39,5 +38,6 @@ def eval(expr: Expr | Token) -> int:
         assert(function.argc == len(expr.terms)-1)
 
         args = list(map(eval, expr.terms[1:]))
+
         return function.call(*args)
 

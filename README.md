@@ -4,6 +4,10 @@
 
 S-expression Calculator implemented in Python.
 
+## Requirements
+
+Tested on `python 3.10` and `python 3.11`. May not work on all Python versions. 
+
 ## Entry Script
 
 `calc.py` is the entry script.
@@ -19,7 +23,7 @@ expression *--`lexer`-->* tokens *--`parser`-->* ast *--`eval`-->* result
 
 The `lexer` will take expression string as input, and output a list of tokens (Left Parenthesis, Right Parenthesis, Integer, Identifier, etc.).  
 The `parser` will take tokens as input, and output the abstract syntax tree of the expression.  
-The `evaluator` execute the AST recursively.
+The `evaluator` executes the AST recursively.g
 
 ## Extensibility
 
@@ -33,7 +37,7 @@ For example, to pre-define a `square` function, add `"square": Function(lambda x
 
 ## Error Handling 
 
- Error handling functions can be implemented separately (instead of handling errors inside of lexer, parser, and evaluator). 
+ Error checking functions can be implemented separately (instead of handling errors inside of lexer, parser, and evaluator). 
 
 ### Check invalid characters and unknown tokens
 A `checkInvalidTokens(tokens: list[Token])` function can be implemented. 
