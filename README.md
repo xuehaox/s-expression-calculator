@@ -2,7 +2,8 @@
 
 ## Author: Xuehao Xiang
 
-S-expression Calculator implemented in Python.
+S-expression Calculator implemented in Python. 
+
 
 ## Requirements
 
@@ -23,7 +24,29 @@ expression *--`lexer`-->* tokens *--`parser`-->* ast *--`eval`-->* result
 
 The `lexer` will take expression string as input, and output a list of tokens (Left Parenthesis, Right Parenthesis, Integer, Identifier, etc.).  
 The `parser` will take tokens as input, and output the abstract syntax tree of the expression.  
-The `evaluator` executes the AST recursively.g
+The `evaluator` executes the AST recursively.
+
+## EBNF Gramma
+
+(My python script is not strictly implemented as this gramma defined.)
+
+```ebnf
+program = integer | expr ;
+
+expr = lparen, identifier, { integer | expr }, rparen ;
+
+identifier = letter, { letter } ;
+integer = digit, { digit } ;
+
+letter =  "a" | "b" | "c" | "d" | "e" | "f" | "g"
+        | "h" | "i" | "j" | "k" | "l" | "m" | "n"
+        | "o" | "p" | "q" | "r" | "s" | "t" | "u"
+        | "v" | "w" | "x" | "y" | "z" ;
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+lparen = "(" ;
+rparen = ")" ;
+```
 
 ## Extensibility
 
@@ -32,8 +55,9 @@ New types of tokens can be easily added in `TOKEN_CHARSET` in `my_lexer.py`.
 For example, operators can be allowed by adding `TokenType.OPERATOR: set("+-*/^")`
 
 ### New functions
-New functions with arbitrary number of arguments can be easily defined in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments.  
+New functions can be easily defined in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments.  
 For example, to pre-define a `square` function, add `"square": Function(lambda x: x**2, 1)`, then expressions like `(square 3)` can be evaluated.
+A function with arbitrary number of arguments can be allowed by allowing `Function.argc` to be `-1`.
 
 ## Error Handling 
 
