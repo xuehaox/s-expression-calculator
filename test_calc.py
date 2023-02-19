@@ -65,7 +65,7 @@ TEST_CASES = [
 
 
 def runCalc(expr: str) -> str:
-    return check_output('python ./calc.py "{}"'.format(expr), shell=True).decode(sys.stdout.encoding).strip()
+    return check_output('./calc.py "{}"'.format(expr), shell=True).decode(sys.stdout.encoding).strip()
 
 
 class TestCalc(unittest.TestCase):
