@@ -1,72 +1,64 @@
 #!/usr/bin/env python3
 
-import unittest 
+import unittest
 from my_lexer import TokenType, Token, lexer
 from my_parser import Expr, parser
 
 
+TEST_CASES = [
 
-class TestLexer(unittest.TestCase):
-    
-    def test_parser(self):
-        
-        self.assertRaises(
-            AssertionError, 
-            parser,
-            lexer("") 
-        )
+    ["", AssertionError],
 
-        self.assertRaises(
-            AssertionError,
-            parser,
-            lexer(" \t \n\t") 
-        )
+    [" \t \n\t", AssertionError],
 
-        self.assertEqual(
-            parser(lexer("123")), 
-            (Token(TokenType.INTEGER, "123")) 
-        )
+    ["abc 032", AssertionError],
 
-        self.assertEqual(
-            parser(lexer("(add 123 456)")),
-            Expr((Token(TokenType.ID, "add"),
-                  Token(TokenType.INTEGER, "123"),
-                  Token(TokenType.INTEGER, "456"),))
-        )
+    ["0mf)(abc 0000 cde )", AssertionError],
 
-        self.assertEqual(
-            parser(lexer("(multiply (add 1 2) 3)")),
-            Expr((Token(TokenType.ID, "multiply"), 
-                  Expr((Token(TokenType.ID, "add"),
-                        Token(TokenType.INTEGER, "1"),
-                        Token(TokenType.INTEGER, "2"),)), 
-                  Token(TokenType.INTEGER, "3"),))
-        )
+    ["$m&)abc 0.0 cde )/", AssertionError],
 
-        self.assertRaises(
-            AssertionError,
-            parser,
-            lexer("abc 032") 
-        )
+    ["123",
+     Token(TokenType.INTEGER, "123")
+     ],
 
-        self.assertEqual(
-            parser(lexer(" (abc 0000 cde ) ")), 
-            Expr((Token(TokenType.ID, "abc"),
-                  Token(TokenType.INTEGER, "0000"),
-                  Token(TokenType.ID, "cde"),))
-        )
+    ["(add 123 456)",
+     Expr((Token(TokenType.ID, "add"),
+          Token(TokenType.INTEGER, "123"),
+          Token(TokenType.INTEGER, "456"),))
+     ],
 
-        self.assertRaises(
-            AssertionError,
-            parser,
-            lexer("0mf)(abc 0000 cde )") 
-        )
-        
-        self.assertRaises(
-            AssertionError,
-            parser,
-            lexer("$m&)abc 0.0 cde )/") 
-        )
+    ["(multiply (add 1 2) 3)",
+     Expr((Token(TokenType.ID, "multiply"),
+          Expr((Token(TokenType.ID, "add"),
+                Token(TokenType.INTEGER, "1"),
+                Token(TokenType.INTEGER, "2"),)),
+          Token(TokenType.INTEGER, "3"),))
+     ],
+
+    [" (abc 0000 cde ) ",
+     Expr((Token(TokenType.ID, "abc"),
+          Token(TokenType.INTEGER, "0000"),
+          Token(TokenType.ID, "cde"),))
+     ],
+]
+
+
+class TestParser(unittest.TestCase):
+
+    def testParser(self):
+        for testCase in TEST_CASES:
+            testInput, result = testCase
+            if (type(result) is type) and issubclass(result, Exception):
+                self.assertRaises(
+                    result,
+                    parser,
+                    lexer(testInput)
+                )
+            else:
+                self.assertEqual(
+                    parser(lexer(testInput)),
+                    result
+                )
 
 
 if __name__ == '__main__':
