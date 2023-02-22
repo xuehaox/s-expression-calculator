@@ -28,8 +28,6 @@ The `evaluator` executes the AST recursively.
 
 ## EBNF Gramma
 
-(My python script is not strictly implemented as this gramma defined.)
-
 ```ebnf
 program = integer | expr ;
 
@@ -52,11 +50,11 @@ rparen = ")" ;
 
 ### New type of tokens
 New types of tokens can be easily added in `TOKEN_CHARSET` in `my_lexer.py`.  
-For example, operators can be allowed by adding `TokenType.OPERATOR: set("+-*/^")`
+For example, operators can be allowed by adding `TokenType.OPERATOR: set("+-*/^<>=")`
 
 ### New functions
 New functions can be easily defined in `ID_TABLE` in `my_eval.py` file. `Function.call` is the handle of the function, `Function.argc` specifies the number of arguments.  
-For example, to pre-define a `square` function, add `"square": Function(lambda x: x**2, 1)`, then expressions like `(square 3)` can be evaluated.
+For example, to pre-define a `square` function, add `"square": Function(lambda x: x**2, 1)`, then expressions like `(square 3)` can be evaluated.  
 A function with arbitrary number of arguments can be allowed by allowing `Function.argc` to be `-1`.
 
 ## Error Handling 
